@@ -1,0 +1,1276 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> RR TEAM </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <!-- jsPDF and jsPDF-AutoTable for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <!-- SheetJS for Excel export -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 p-4 min-h-screen flex flex-col">
+  <div class="max-w-7xl mx-auto w-full flex flex-col flex-grow">
+        <body class="bg-gray-100 min-h-screen flex flex-col">
+  <header class="bg-blue-600 text-white p-4 flex items-center justify-center space-x-3">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 64 64"
+      class="w-10 h-10"
+      aria-hidden="true"
+      role="img"
+    >
+      <rect width="64" height="64" fill="black" rx="8" ry="8"></rect>
+      <text
+        x="50%"
+        y="50%"
+        fill="red"
+        font-family="Arial, sans-serif"
+        font-weight="bold"
+        font-size="36"
+        dominant-baseline="middle"
+        text-anchor="middle"
+        letter-spacing="-4"
+      >
+        RR
+      </text>
+    </svg>
+    <span class="text-2xl font-semibold select-none">RR TEAM MEDICAL UNIT</span>
+  </header>
+
+
+    <!-- Tabs -->
+    <div class="mb-6 flex border-b border-gray-300">
+      <button id="tab1Btn" class="px-4 py-2 -mb-px border-b-2 border-indigo-600 text-indigo-600 font-semibold focus:outline-none" aria-selected="true" role="tab" type="button">INPUT DATA</button>
+      <button id="tab2Btn" class="px-4 py-2 -mb-px border-b-2 border-transparent text-gray-600 hover:text-indigo-600 focus:outline-none" aria-selected="false" role="tab" type="button">REPORT KEGIATAN</button>
+      <button id="tab3Btn" class="px-4 py-2 -mb-px border-b-2 border-transparent text-gray-600 hover:text-indigo-600 focus:outline-none" aria-selected="false" role="tab" type="button">REPORT PENGGUNAAN FILM</button>
+    </div>
+
+    <!-- Slide 1 Content -->
+    <section id="slide1" role="tabpanel" aria-labelledby="tab1Btn" class="flex flex-col flex-grow">
+      <!-- Form for Add/Edit Slide 1 -->
+      <form id="dataForm1" class="mb-6 bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div>
+            <label for="tanggal1" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Kegiatan</label>
+            <input type="date" id="tanggal1" name="tanggal1" required class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="pengirim1" class="block text-sm font-medium text-gray-700 mb-1">Nama Pengirim</label>
+            <input type="text" id="pengirim1" name="pengirim1" required placeholder="Nama Pengirim" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="id1" class="block text-sm font-medium text-gray-700 mb-1">ID</label>
+            <input type="text" id="id1" name="id1" required placeholder="ID" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="peserta1" class="block text-sm font-medium text-gray-700 mb-1">Nama Peserta</label>
+            <input type="text" id="peserta1" name="peserta1" required placeholder="Nama Peserta" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="jenisKelamin1" class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
+            <select id="jenisKelamin1" name="jenisKelamin1" required class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="" disabled selected>Pilih Jenis Kelamin</option>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+          <div>
+            <label for="catatan1" class="block text-sm font-medium text-gray-700 mb-1">Catatan</label>
+            <input type="text" id="catatan1" name="catatan1" placeholder="Catatan" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+        <div class="mt-4 flex justify-end space-x-3">
+          <button type="reset" id="cancelBtn1" class="hidden px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition">Batal</button>
+          <button type="submit" id="saveBtn1" class="px-6 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition flex items-center space-x-2">
+            <i class="fas fa-save"></i><span>Simpan</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Actions above table Slide 1 -->
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-3 flex-wrap">
+          <label class="inline-flex items-center space-x-2 cursor-pointer select-none">
+            <input type="checkbox" id="selectAll1" class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" aria-label="Pilih semua baris slide 1" />
+            <span class="text-gray-700 font-medium">Pilih Semua</span>
+          </label>
+        </div>
+        <div class="flex space-x-3 flex-wrap">
+          <button id="deleteSelectedBtn1" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition flex items-center space-x-2" disabled>
+            <i class="fas fa-trash-alt"></i><span>Hapus</span>
+          </button>
+          <button id="cancelSelectionBtn1" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition flex items-center space-x-2" disabled>
+            <i class="fas fa-times"></i><span>Batal</span>
+          </button>
+                  <div class="flex items-center space-x-3">
+          <label for="startDate" class="text-gray-700 font-medium whitespace-nowrap">Tanggal Awal:</label>
+          <input type="date" id="startDate" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="flex items-center space-x-3">
+          <label for="endDate" class="text-gray-700 font-medium whitespace-nowrap">Tanggal Akhir:</label>
+          <input type="date" id="endDate" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+ 
+          <button id="exportExcelBtn1" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center space-x-2">
+            <i class="fas fa-file-excel"></i><span>Export Excel</span>
+          </button>
+          <button id="exportPdfBtn1" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition flex items-center space-x-2">
+            <i class="fas fa-file-pdf"></i><span>Export PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Slide 1 -->
+      <div class="overflow-x-auto shadow-md rounded-lg bg-white flex-grow">
+        <table class="min-w-full divide-y divide-gray-200" id="table1">
+          <thead class="bg-gray-100">
+            <tr>
+              <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider"></th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">TANGGAL KEGIATAN</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NAMA PENGIRIM</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">ID</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NAMA PESERTA</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">JENIS KELAMIN</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">CATATAN</th>
+              <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody1" class="divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Slide 2 Content -->
+    <section id="slide2" role="tabpanel" aria-labelledby="tab2Btn" class="hidden flex flex-col flex-grow">
+      <!-- Form for Add/Edit Slide 2 -->
+      <form id="dataForm2" class="mb-6 bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+          <div>
+            <label for="tanggal2" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Kegiatan</label>
+            <input type="date" id="tanggal2" name="tanggal2" required class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="petugas2" class="block text-sm font-medium text-gray-700 mb-1">Nama Petugas</label>
+            <input type="text" id="petugas2" name="petugas2" required placeholder="Nama Petugas" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="jumlah2" class="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
+            <input type="number" id="jumlah2" name="jumlah2" required placeholder="Jumlah" min="0" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="pengirim2" class="block text-sm font-medium text-gray-700 mb-1">Nama Pengirim</label>
+            <input type="text" id="pengirim2" name="pengirim2" required placeholder="Nama Pengirim" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+        <div class="mt-4 flex justify-end space-x-3">
+          <button type="reset" id="cancelBtn2" class="hidden px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition">Batal</button>
+          <button type="submit" id="saveBtn2" class="px-6 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition flex items-center space-x-2">
+            <i class="fas fa-save"></i><span>Simpan</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Actions above table Slide 2 -->
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-3 flex-wrap">
+          <label class="inline-flex items-center space-x-2 cursor-pointer select-none">
+            <input type="checkbox" id="selectAll2" class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" aria-label="Pilih semua baris slide 2" />
+            <span class="text-gray-700 font-medium">Pilih Semua</span>
+          </label>
+        </div>
+        <div class="flex space-x-3 flex-wrap">
+          <button id="deleteSelectedBtn2" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition flex items-center space-x-2" disabled>
+            <i class="fas fa-trash-alt"></i><span>Hapus</span>
+          </button>
+          <button id="cancelSelectionBtn2" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition flex items-center space-x-2" disabled>
+            <i class="fas fa-times"></i><span>Batal</span>
+          </button>
+                  <div class="flex items-center space-x-3">
+          <label for="startDate" class="text-gray-700 font-medium whitespace-nowrap">Tanggal Awal:</label>
+          <input type="date" id="startDate" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="flex items-center space-x-3">
+          <label for="endDate" class="text-gray-700 font-medium whitespace-nowrap">Tanggal Akhir:</label>
+          <input type="date" id="endDate" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+ 
+          <button id="exportExcelBtn2" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center space-x-2">
+            <i class="fas fa-file-excel"></i><span>Export Excel</span>
+          </button>
+          <button id="exportPdfBtn2" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition flex items-center space-x-2">
+            <i class="fas fa-file-pdf"></i><span>Export PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Slide 2 -->
+      <div class="overflow-x-auto shadow-md rounded-lg bg-white flex-grow">
+        <table class="min-w-full divide-y divide-gray-200" id="table2">
+          <thead class="bg-gray-100">
+            <tr>
+              <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider"></th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">TANGGAL KEGIATAN</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NAMA PETUGAS</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">JUMLAH</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NAMA PENGIRIM</th>
+              <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody2" class="divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Slide 3 Content -->
+    <section id="slide3" role="tabpanel" aria-labelledby="tab3Btn" class="hidden flex flex-col flex-grow">
+      <!-- Form for Add/Edit Slide 3 -->
+      <form id="dataForm3" class="mb-6 bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4">
+          <div>
+            <label for="tanggal3" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Di Print</label>
+            <input type="date" id="tanggal3" name="tanggal3" required class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="pengirim3" class="block text-sm font-medium text-gray-700 mb-1">Nama Pengirim</label>
+            <input type="text" id="pengirim3" name="pengirim3" required placeholder="Nama Pengirim" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="petugas3" class="block text-sm font-medium text-gray-700 mb-1">Nama Petugas</label>
+            <input type="text" id="petugas3" name="petugas3" required placeholder="Nama Petugas" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="filmReject3" class="block text-sm font-medium text-gray-700 mb-1">Film Reject</label>
+            <input type="number" id="filmReject3" name="filmReject3" required placeholder="Film Reject" min="0" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="filmNonReject3" class="block text-sm font-medium text-gray-700 mb-1">Film Non Reject</label>
+            <input type="number" id="filmNonReject3" name="filmNonReject3" required placeholder="Film Non Reject" min="0" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+        <div class="mt-4 flex justify-end space-x-3">
+          <button type="reset" id="cancelBtn3" class="hidden px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition">Batal</button>
+          <button type="submit" id="saveBtn3" class="px-6 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition flex items-center space-x-2">
+            <i class="fas fa-save"></i><span>Simpan</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Actions above table Slide 3 -->
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-3 flex-wrap">
+          <label class="inline-flex items-center space-x-2 cursor-pointer select-none">
+            <input type="checkbox" id="selectAll3" class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" aria-label="Pilih semua baris slide 3" />
+            <span class="text-gray-700 font-medium">Pilih Semua</span>
+          </label>
+        </div>
+        <div class="flex space-x-3 flex-wrap">
+          <button id="deleteSelectedBtn3" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition flex items-center space-x-2" disabled>
+            <i class="fas fa-trash-alt"></i><span>Hapus</span>
+          </button>
+          <button id="cancelSelectionBtn3" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition flex items-center space-x-2" disabled>
+            <i class="fas fa-times"></i><span>Batal</span>
+          </button>
+                  <div class="flex items-center space-x-3">
+          <label for="startDate" class="text-gray-700 font-medium whitespace-nowrap">Tanggal Awal:</label>
+          <input type="date" id="startDate" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="flex items-center space-x-3">
+          <label for="endDate" class="text-gray-700 font-medium whitespace-nowrap">Tanggal Akhir:</label>
+          <input type="date" id="endDate" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+ 
+          <button id="exportExcelBtn3" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center space-x-2">
+            <i class="fas fa-file-excel"></i><span>Export Excel</span>
+          </button>
+          <button id="exportPdfBtn3" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition flex items-center space-x-2">
+            <i class="fas fa-file-pdf"></i><span>Export PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Slide 3 -->
+      <div class="overflow-x-auto shadow-md rounded-lg bg-white flex-grow">
+        <table class="min-w-full divide-y divide-gray-200" id="table3">
+          <thead class="bg-gray-100">
+            <tr>
+              <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider"></th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">TANGGAL DI PRINT</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NAMA PENGIRIM</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NAMA PETUGAS</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">FILM REJECT</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">FILM NON REJECT</th>
+              <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody3" class="divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+
+    // Tabs
+    const tab1Btn = document.getElementById('tab1Btn');
+    const tab2Btn = document.getElementById('tab2Btn');
+    const tab3Btn = document.getElementById('tab3Btn');
+    const slide1 = document.getElementById('slide1');
+    const slide2 = document.getElementById('slide2');
+    const slide3 = document.getElementById('slide3');
+
+    tab1Btn.addEventListener('click', () => {
+      tab1Btn.classList.add('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab1Btn.setAttribute('aria-selected', 'true');
+      tab2Btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab2Btn.setAttribute('aria-selected', 'false');
+      tab3Btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab3Btn.setAttribute('aria-selected', 'false');
+      slide1.classList.remove('hidden');
+      slide2.classList.add('hidden');
+      slide3.classList.add('hidden');
+    });
+
+    tab2Btn.addEventListener('click', () => {
+      tab2Btn.classList.add('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab2Btn.setAttribute('aria-selected', 'true');
+      tab1Btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab1Btn.setAttribute('aria-selected', 'false');
+      tab3Btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab3Btn.setAttribute('aria-selected', 'false');
+      slide2.classList.remove('hidden');
+      slide1.classList.add('hidden');
+      slide3.classList.add('hidden');
+    });
+
+    tab3Btn.addEventListener('click', () => {
+      tab3Btn.classList.add('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab3Btn.setAttribute('aria-selected', 'true');
+      tab1Btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab1Btn.setAttribute('aria-selected', 'false');
+      tab2Btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
+      tab2Btn.setAttribute('aria-selected', 'false');
+      slide3.classList.remove('hidden');
+      slide1.classList.add('hidden');
+      slide2.classList.add('hidden');
+    });
+
+    // Slide 1 Elements
+    const form1 = document.getElementById('dataForm1');
+    const tableBody1 = document.getElementById('tableBody1');
+    const cancelBtn1 = document.getElementById('cancelBtn1');
+    const saveBtn1 = document.getElementById('saveBtn1');
+    const selectAllCheckbox1 = document.getElementById('selectAll1');
+    const deleteSelectedBtn1 = document.getElementById('deleteSelectedBtn1');
+    const cancelSelectionBtn1 = document.getElementById('cancelSelectionBtn1');
+    const exportExcelBtn1 = document.getElementById('exportExcelBtn1');
+    const exportPdfBtn1 = document.getElementById('exportPdfBtn1');
+
+    const tanggalInput1 = document.getElementById('tanggal1');
+    const pengirimInput1 = document.getElementById('pengirim1');
+    const idInput1 = document.getElementById('id1');
+    const pesertaInput1 = document.getElementById('peserta1');
+    const jenisKelaminInput1 = document.getElementById('jenisKelamin1');
+    const catatanInput1 = document.getElementById('catatan1');
+
+    // Slide 2 Elements
+    const form2 = document.getElementById('dataForm2');
+    const tableBody2 = document.getElementById('tableBody2');
+    const cancelBtn2 = document.getElementById('cancelBtn2');
+    const saveBtn2 = document.getElementById('saveBtn2');
+    const selectAllCheckbox2 = document.getElementById('selectAll2');
+    const deleteSelectedBtn2 = document.getElementById('deleteSelectedBtn2');
+    const cancelSelectionBtn2 = document.getElementById('cancelSelectionBtn2');
+    const exportExcelBtn2 = document.getElementById('exportExcelBtn2');
+    const exportPdfBtn2 = document.getElementById('exportPdfBtn2');
+
+    const tanggalInput2 = document.getElementById('tanggal2');
+    const petugasInput2 = document.getElementById('petugas2');
+    const jumlahInput2 = document.getElementById('jumlah2');
+    const pengirimInput2 = document.getElementById('pengirim2');
+
+    // Slide 3 Elements
+    const form3 = document.getElementById('dataForm3');
+    const tableBody3 = document.getElementById('tableBody3');
+    const cancelBtn3 = document.getElementById('cancelBtn3');
+    const saveBtn3 = document.getElementById('saveBtn3');
+    const selectAllCheckbox3 = document.getElementById('selectAll3');
+    const deleteSelectedBtn3 = document.getElementById('deleteSelectedBtn3');
+    const cancelSelectionBtn3 = document.getElementById('cancelSelectionBtn3');
+    const exportExcelBtn3 = document.getElementById('exportExcelBtn3');
+    const exportPdfBtn3 = document.getElementById('exportPdfBtn3');
+
+    const tanggalInput3 = document.getElementById('tanggal3');
+    const pengirimInput3 = document.getElementById('pengirim3');
+    const petugasInput3 = document.getElementById('petugas3');
+    const filmRejectInput3 = document.getElementById('filmReject3');
+    const filmNonRejectInput3 = document.getElementById('filmNonReject3');
+
+    // LocalStorage keys
+    const STORAGE_KEY_1 = 'tableSlide1Data';
+    const STORAGE_KEY_2 = 'tableSlide2Data';
+    const STORAGE_KEY_3 = 'tableSlide3Data';
+
+    // Data arrays and edit indexes
+    let data1 = [];
+    let editIndex1 = -1;
+    let data2 = [];
+    let editIndex2 = -1;
+    let data3 = [];
+    let editIndex3 = -1;
+
+    // Load data from localStorage or initialize default data
+    function loadData() {
+      const stored1 = localStorage.getItem(STORAGE_KEY_1);
+      if (stored1) {
+        try {
+          data1 = JSON.parse(stored1);
+          if (!Array.isArray(data1)) data1 = [];
+        } catch {
+          data1 = [];
+        }
+      } else {
+        data1 = [
+          { tanggal: '2024-06-01', pengirim: 'Andi Wijaya', id: 'ID001', peserta: 'Budi Santoso', jenisKelamin: 'Laki-laki', catatan: 'Hadir tepat waktu' },
+          { tanggal: '2024-06-02', pengirim: 'Sari Dewi', id: 'ID002', peserta: 'Dewi Lestari', jenisKelamin: 'Perempuan', catatan: 'Membawa materi lengkap' },
+          { tanggal: '2024-06-03', pengirim: 'Rizky Pratama', id: 'ID003', peserta: 'Agus Santoso', jenisKelamin: 'Laki-laki', catatan: 'Butuh bantuan teknis' },
+          { tanggal: '2024-06-04', pengirim: 'Maya Putri', id: 'ID004', peserta: 'Siti Aminah', jenisKelamin: 'Perempuan', catatan: 'Sakit, izin tidak hadir' },
+          { tanggal: '2024-06-05', pengirim: 'Dedi Kurniawan', id: 'ID005', peserta: 'Rina Marlina', jenisKelamin: 'Perempuan', catatan: 'Telat 10 menit' },
+          { tanggal: '2024-06-06', pengirim: 'Fajar Nugroho', id: 'ID006', peserta: 'Eka Putra', jenisKelamin: 'Laki-laki', catatan: 'Membawa alat tulis' },
+          { tanggal: '2024-06-07', pengirim: 'Lina Marlina', id: 'ID007', peserta: 'Dewi Anggraini', jenisKelamin: 'Perempuan', catatan: 'Aktif bertanya' },
+          { tanggal: '2024-06-08', pengirim: 'Agus Santoso', id: 'ID008', peserta: 'Rizky Pratama', jenisKelamin: 'Laki-laki', catatan: 'Perlu pengulangan materi' },
+          { tanggal: '2024-06-09', pengirim: 'Sari Dewi', id: 'ID009', peserta: 'Maya Putri', jenisKelamin: 'Perempuan', catatan: 'Membantu teman' },
+          { tanggal: '2024-06-10', pengirim: 'Dedi Kurniawan', id: 'ID010', peserta: 'Andi Wijaya', jenisKelamin: 'Laki-laki', catatan: 'Selesai tepat waktu' },
+          { tanggal: '2024-06-11', pengirim: 'Fajar Nugroho', id: 'ID011', peserta: 'Lina Marlina', jenisKelamin: 'Perempuan', catatan: 'Perlu motivasi tambahan' },
+          { tanggal: '2024-06-12', pengirim: 'Maya Putri', id: 'ID012', peserta: 'Dedi Kurniawan', jenisKelamin: 'Laki-laki', catatan: 'Sakit, izin hadir online' },
+          { tanggal: '2024-06-13', pengirim: 'Andi Wijaya', id: 'ID013', peserta: 'Fajar Nugroho', jenisKelamin: 'Laki-laki', catatan: 'Membantu persiapan acara' },
+          { tanggal: '2024-06-14', pengirim: 'Rizky Pratama', id: 'ID014', peserta: 'Sari Dewi', jenisKelamin: 'Perempuan', catatan: 'Perlu pengulangan materi' },
+          { tanggal: '2024-06-15', pengirim: 'Lina Marlina', id: 'ID015', peserta: 'Maya Putri', jenisKelamin: 'Perempuan', catatan: 'Aktif berpartisipasi' }
+        ];
+        saveData1();
+      }
+
+      const stored2 = localStorage.getItem(STORAGE_KEY_2);
+      if (stored2) {
+        try {
+          data2 = JSON.parse(stored2);
+          if (!Array.isArray(data2)) data2 = [];
+        } catch {
+          data2 = [];
+        }
+      } else {
+        data2 = [
+          { tanggal: '2024-06-01', petugas: 'Budi Santoso', jumlah: 10, pengirim: 'Andi Wijaya' },
+          { tanggal: '2024-06-02', petugas: 'Dewi Lestari', jumlah: 15, pengirim: 'Sari Dewi' },
+          { tanggal: '2024-06-03', petugas: 'Agus Santoso', jumlah: 8, pengirim: 'Rizky Pratama' },
+          { tanggal: '2024-06-04', petugas: 'Siti Aminah', jumlah: 12, pengirim: 'Maya Putri' },
+          { tanggal: '2024-06-05', petugas: 'Rina Marlina', jumlah: 7, pengirim: 'Dedi Kurniawan' },
+          { tanggal: '2024-06-06', petugas: 'Eka Putra', jumlah: 20, pengirim: 'Fajar Nugroho' },
+          { tanggal: '2024-06-07', petugas: 'Dewi Anggraini', jumlah: 5, pengirim: 'Lina Marlina' },
+          { tanggal: '2024-06-08', petugas: 'Rizky Pratama', jumlah: 18, pengirim: 'Agus Santoso' },
+          { tanggal: '2024-06-09', petugas: 'Maya Putri', jumlah: 9, pengirim: 'Sari Dewi' },
+          { tanggal: '2024-06-10', petugas: 'Andi Wijaya', jumlah: 14, pengirim: 'Dedi Kurniawan' },
+          { tanggal: '2024-06-11', petugas: 'Lina Marlina', jumlah: 11, pengirim: 'Fajar Nugroho' },
+          { tanggal: '2024-06-12', petugas: 'Dedi Kurniawan', jumlah: 6, pengirim: 'Maya Putri' },
+          { tanggal: '2024-06-13', petugas: 'Fajar Nugroho', jumlah: 13, pengirim: 'Andi Wijaya' },
+          { tanggal: '2024-06-14', petugas: 'Sari Dewi', jumlah: 16, pengirim: 'Rizky Pratama' },
+          { tanggal: '2024-06-15', petugas: 'Maya Putri', jumlah: 10, pengirim: 'Lina Marlina' }
+        ];
+        saveData2();
+      }
+
+      const stored3 = localStorage.getItem(STORAGE_KEY_3);
+      if (stored3) {
+        try {
+          data3 = JSON.parse(stored3);
+          if (!Array.isArray(data3)) data3 = [];
+        } catch {
+          data3 = [];
+        }
+      } else {
+        data3 = [
+          { tanggalPrint: '2024-06-01', pengirim: 'Andi Wijaya', petugas: 'Budi Santoso', filmReject: 2, filmNonReject: 8 },
+          { tanggalPrint: '2024-06-02', pengirim: 'Sari Dewi', petugas: 'Dewi Lestari', filmReject: 1, filmNonReject: 14 },
+          { tanggalPrint: '2024-06-03', pengirim: 'Rizky Pratama', petugas: 'Agus Santoso', filmReject: 0, filmNonReject: 8 },
+          { tanggalPrint: '2024-06-04', pengirim: 'Maya Putri', petugas: 'Siti Aminah', filmReject: 3, filmNonReject: 9 },
+          { tanggalPrint: '2024-06-05', pengirim: 'Dedi Kurniawan', petugas: 'Rina Marlina', filmReject: 2, filmNonReject: 5 },
+          { tanggalPrint: '2024-06-06', pengirim: 'Fajar Nugroho', petugas: 'Eka Putra', filmReject: 1, filmNonReject: 19 },
+          { tanggalPrint: '2024-06-07', pengirim: 'Lina Marlina', petugas: 'Dewi Anggraini', filmReject: 0, filmNonReject: 5 },
+          { tanggalPrint: '2024-06-08', pengirim: 'Agus Santoso', petugas: 'Rizky Pratama', filmReject: 4, filmNonReject: 14 },
+          { tanggalPrint: '2024-06-09', pengirim: 'Sari Dewi', petugas: 'Maya Putri', filmReject: 1, filmNonReject: 8 },
+          { tanggalPrint: '2024-06-10', pengirim: 'Dedi Kurniawan', petugas: 'Andi Wijaya', filmReject: 2, filmNonReject: 12 },
+          { tanggalPrint: '2024-06-11', pengirim: 'Fajar Nugroho', petugas: 'Lina Marlina', filmReject: 0, filmNonReject: 11 },
+          { tanggalPrint: '2024-06-12', pengirim: 'Maya Putri', petugas: 'Dedi Kurniawan', filmReject: 3, filmNonReject: 3 },
+          { tanggalPrint: '2024-06-13', pengirim: 'Andi Wijaya', petugas: 'Fajar Nugroho', filmReject: 1, filmNonReject: 12 },
+          { tanggalPrint: '2024-06-14', pengirim: 'Rizky Pratama', petugas: 'Sari Dewi', filmReject: 2, filmNonReject: 14 },
+          { tanggalPrint: '2024-06-15', pengirim: 'Lina Marlina', petugas: 'Maya Putri', filmReject: 0, filmNonReject: 10 }
+        ];
+        saveData3();
+      }
+    }
+
+    function saveData1() {
+      localStorage.setItem(STORAGE_KEY_1, JSON.stringify(data1));
+    }
+    function saveData2() {
+      localStorage.setItem(STORAGE_KEY_2, JSON.stringify(data2));
+    }
+    function saveData3() {
+      localStorage.setItem(STORAGE_KEY_3, JSON.stringify(data3));
+    }
+
+    // Slide 1 Functions
+    function renderTable1() {
+      tableBody1.innerHTML = '';
+      data1.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-gray-50';
+
+        tr.innerHTML = `
+          <td class="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900">
+            <input type="checkbox" class="rowCheckbox1 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-index="${index}" aria-label="Pilih baris ${index + 1}" />
+          </td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.tanggal}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.pengirim}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.id}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.peserta}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.jenisKelamin}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.catatan}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900 space-x-2">
+            <button data-index="${index}" class="editBtn1 text-indigo-600 hover:text-indigo-900" aria-label="Edit row ${index + 1}">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button data-index="${index}" class="deleteBtn1 text-red-600 hover:text-red-900" aria-label="Delete row ${index + 1}">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        `;
+        tableBody1.appendChild(tr);
+      });
+
+      document.querySelectorAll('.editBtn1').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.currentTarget.getAttribute('data-index');
+          startEdit1(parseInt(idx));
+        });
+      });
+
+      document.querySelectorAll('.deleteBtn1').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.currentTarget.getAttribute('data-index');
+          deleteRow1(parseInt(idx));
+        });
+      });
+
+      document.querySelectorAll('.rowCheckbox1').forEach(cb => {
+        cb.addEventListener('change', updateSelectionState1);
+      });
+
+      updateSelectionState1();
+    }
+
+    function startEdit1(index) {
+      const item = data1[index];
+      tanggalInput1.value = item.tanggal;
+      pengirimInput1.value = item.pengirim;
+      idInput1.value = item.id;
+      pesertaInput1.value = item.peserta;
+      jenisKelaminInput1.value = item.jenisKelamin;
+      catatanInput1.value = item.catatan;
+      editIndex1 = index;
+      cancelBtn1.classList.remove('hidden');
+      saveBtn1.innerHTML = '<i class="fas fa-save"></i><span> Update</span>';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteRow1(index) {
+      if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+        data1.splice(index, 1);
+        saveData1();
+        if (editIndex1 === index) {
+          resetForm1();
+        } else if (editIndex1 > index) {
+          editIndex1--;
+        }
+        renderTable1();
+      }
+    }
+
+    function resetForm1() {
+      form1.reset();
+      editIndex1 = -1;
+      cancelBtn1.classList.add('hidden');
+      saveBtn1.innerHTML = '<i class="fas fa-save"></i><span> Simpan</span>';
+    }
+
+    form1.addEventListener('submit', e => {
+      e.preventDefault();
+      const newItem = {
+        tanggal: tanggalInput1.value,
+        pengirim: pengirimInput1.value.trim(),
+        id: idInput1.value.trim(),
+        peserta: pesertaInput1.value.trim(),
+        jenisKelamin: jenisKelaminInput1.value,
+        catatan: catatanInput1.value.trim()
+      };
+
+      if (editIndex1 === -1) {
+        data1.push(newItem);
+      } else {
+        data1[editIndex1] = newItem;
+      }
+      saveData1();
+      resetForm1();
+      renderTable1();
+    });
+
+    cancelBtn1.addEventListener('click', e => {
+      e.preventDefault();
+      resetForm1();
+    });
+
+    selectAllCheckbox1.addEventListener('change', () => {
+      const checked = selectAllCheckbox1.checked;
+      document.querySelectorAll('.rowCheckbox1').forEach(cb => {
+        cb.checked = checked;
+      });
+      updateSelectionState1();
+    });
+
+    deleteSelectedBtn1.addEventListener('click', () => {
+      const selectedIndexes = getSelectedIndexes1();
+      if (selectedIndexes.length === 0) return;
+      if (confirm(`Apakah Anda yakin ingin menghapus ${selectedIndexes.length} data terpilih?`)) {
+        selectedIndexes.sort((a,b) => b - a);
+        for (const idx of selectedIndexes) {
+          if (editIndex1 === idx) resetForm1();
+          data1.splice(idx, 1);
+          if (editIndex1 > idx) editIndex1--;
+        }
+        saveData1();
+        renderTable1();
+      }
+    });
+
+    cancelSelectionBtn1.addEventListener('click', () => {
+      document.querySelectorAll('.rowCheckbox1').forEach(cb => {
+        cb.checked = false;
+      });
+      selectAllCheckbox1.checked = false;
+      selectAllCheckbox1.indeterminate = false;
+      updateSelectionState1();
+    });
+
+    function getSelectedIndexes1() {
+      const selected = [];
+      document.querySelectorAll('.rowCheckbox1').forEach(cb => {
+        if (cb.checked) selected.push(parseInt(cb.getAttribute('data-index')));
+      });
+      return selected;
+    }
+
+    function updateSelectionState1() {
+      const checkboxes = document.querySelectorAll('.rowCheckbox1');
+      const checkedBoxes = document.querySelectorAll('.rowCheckbox1:checked');
+      if (checkboxes.length === 0) {
+        selectAllCheckbox1.checked = false;
+        selectAllCheckbox1.indeterminate = false;
+        deleteSelectedBtn1.disabled = true;
+        cancelSelectionBtn1.disabled = true;
+        return;
+      }
+      if (checkedBoxes.length === 0) {
+        selectAllCheckbox1.checked = false;
+        selectAllCheckbox1.indeterminate = false;
+        deleteSelectedBtn1.disabled = true;
+        cancelSelectionBtn1.disabled = true;
+      } else if (checkedBoxes.length === checkboxes.length) {
+        selectAllCheckbox1.checked = true;
+        selectAllCheckbox1.indeterminate = false;
+        deleteSelectedBtn1.disabled = false;
+        cancelSelectionBtn1.disabled = false;
+      } else {
+        selectAllCheckbox1.checked = false;
+        selectAllCheckbox1.indeterminate = true;
+        deleteSelectedBtn1.disabled = false;
+        cancelSelectionBtn1.disabled = false;
+      }
+    }
+
+    // Slide 2 Functions
+    function renderTable2() {
+      tableBody2.innerHTML = '';
+      data2.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-gray-50';
+
+        tr.innerHTML = `
+          <td class="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900">
+            <input type="checkbox" class="rowCheckbox2 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-index="${index}" aria-label="Pilih baris ${index + 1}" />
+          </td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.tanggal}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.petugas}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.jumlah}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.pengirim}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900 space-x-2">
+            <button data-index="${index}" class="editBtn2 text-indigo-600 hover:text-indigo-900" aria-label="Edit row ${index + 1}">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button data-index="${index}" class="deleteBtn2 text-red-600 hover:text-red-900" aria-label="Delete row ${index + 1}">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        `;
+        tableBody2.appendChild(tr);
+      });
+
+      document.querySelectorAll('.editBtn2').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.currentTarget.getAttribute('data-index');
+          startEdit2(parseInt(idx));
+        });
+      });
+
+      document.querySelectorAll('.deleteBtn2').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.currentTarget.getAttribute('data-index');
+          deleteRow2(parseInt(idx));
+        });
+      });
+
+      document.querySelectorAll('.rowCheckbox2').forEach(cb => {
+        cb.addEventListener('change', updateSelectionState2);
+      });
+
+      updateSelectionState2();
+    }
+
+    function startEdit2(index) {
+      const item = data2[index];
+      tanggalInput2.value = item.tanggal;
+      petugasInput2.value = item.petugas;
+      jumlahInput2.value = item.jumlah;
+      pengirimInput2.value = item.pengirim;
+      editIndex2 = index;
+      cancelBtn2.classList.remove('hidden');
+      saveBtn2.innerHTML = '<i class="fas fa-save"></i><span> Update</span>';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteRow2(index) {
+      if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+        data2.splice(index, 1);
+        saveData2();
+        if (editIndex2 === index) {
+          resetForm2();
+        } else if (editIndex2 > index) {
+          editIndex2--;
+        }
+        renderTable2();
+      }
+    }
+
+    function resetForm2() {
+      form2.reset();
+      editIndex2 = -1;
+      cancelBtn2.classList.add('hidden');
+      saveBtn2.innerHTML = '<i class="fas fa-save"></i><span> Simpan</span>';
+    }
+
+    form2.addEventListener('submit', e => {
+      e.preventDefault();
+      const newItem = {
+        tanggal: tanggalInput2.value,
+        petugas: petugasInput2.value.trim(),
+        jumlah: Number(jumlahInput2.value),
+        pengirim: pengirimInput2.value.trim()
+      };
+
+      if (editIndex2 === -1) {
+        data2.push(newItem);
+      } else {
+        data2[editIndex2] = newItem;
+      }
+      saveData2();
+      resetForm2();
+      renderTable2();
+    });
+
+    cancelBtn2.addEventListener('click', e => {
+      e.preventDefault();
+      resetForm2();
+    });
+
+    selectAllCheckbox2.addEventListener('change', () => {
+      const checked = selectAllCheckbox2.checked;
+      document.querySelectorAll('.rowCheckbox2').forEach(cb => {
+        cb.checked = checked;
+      });
+      updateSelectionState2();
+    });
+
+    deleteSelectedBtn2.addEventListener('click', () => {
+      const selectedIndexes = getSelectedIndexes2();
+      if (selectedIndexes.length === 0) return;
+      if (confirm(`Apakah Anda yakin ingin menghapus ${selectedIndexes.length} data terpilih?`)) {
+        selectedIndexes.sort((a,b) => b - a);
+        for (const idx of selectedIndexes) {
+          if (editIndex2 === idx) resetForm2();
+          data2.splice(idx, 1);
+          if (editIndex2 > idx) editIndex2--;
+        }
+        saveData2();
+        renderTable2();
+      }
+    });
+
+    cancelSelectionBtn2.addEventListener('click', () => {
+      document.querySelectorAll('.rowCheckbox2').forEach(cb => {
+        cb.checked = false;
+      });
+      selectAllCheckbox2.checked = false;
+      selectAllCheckbox2.indeterminate = false;
+      updateSelectionState2();
+    });
+
+    function getSelectedIndexes2() {
+      const selected = [];
+      document.querySelectorAll('.rowCheckbox2').forEach(cb => {
+        if (cb.checked) selected.push(parseInt(cb.getAttribute('data-index')));
+      });
+      return selected;
+    }
+
+    function updateSelectionState2() {
+      const checkboxes = document.querySelectorAll('.rowCheckbox2');
+      const checkedBoxes = document.querySelectorAll('.rowCheckbox2:checked');
+      if (checkboxes.length === 0) {
+        selectAllCheckbox2.checked = false;
+        selectAllCheckbox2.indeterminate = false;
+        deleteSelectedBtn2.disabled = true;
+        cancelSelectionBtn2.disabled = true;
+        return;
+      }
+      if (checkedBoxes.length === 0) {
+        selectAllCheckbox2.checked = false;
+        selectAllCheckbox2.indeterminate = false;
+        deleteSelectedBtn2.disabled = true;
+        cancelSelectionBtn2.disabled = true;
+      } else if (checkedBoxes.length === checkboxes.length) {
+        selectAllCheckbox2.checked = true;
+        selectAllCheckbox2.indeterminate = false;
+        deleteSelectedBtn2.disabled = false;
+        cancelSelectionBtn2.disabled = false;
+      } else {
+        selectAllCheckbox2.checked = false;
+        selectAllCheckbox2.indeterminate = true;
+        deleteSelectedBtn2.disabled = false;
+        cancelSelectionBtn2.disabled = false;
+      }
+    }
+
+    // Slide 3 Functions
+    function renderTable3() {
+      tableBody3.innerHTML = '';
+      data3.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-gray-50';
+
+        tr.innerHTML = `
+          <td class="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900">
+            <input type="checkbox" class="rowCheckbox3 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-index="${index}" aria-label="Pilih baris ${index + 1}" />
+          </td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.tanggalPrint}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.pengirim}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.petugas}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.filmReject}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">${item.filmNonReject}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900 space-x-2">
+            <button data-index="${index}" class="editBtn3 text-indigo-600 hover:text-indigo-900" aria-label="Edit row ${index + 1}">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button data-index="${index}" class="deleteBtn3 text-red-600 hover:text-red-900" aria-label="Delete row ${index + 1}">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        `;
+        tableBody3.appendChild(tr);
+      });
+
+      document.querySelectorAll('.editBtn3').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.currentTarget.getAttribute('data-index');
+          startEdit3(parseInt(idx));
+        });
+      });
+
+      document.querySelectorAll('.deleteBtn3').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.currentTarget.getAttribute('data-index');
+          deleteRow3(parseInt(idx));
+        });
+      });
+
+      document.querySelectorAll('.rowCheckbox3').forEach(cb => {
+        cb.addEventListener('change', updateSelectionState3);
+      });
+
+      updateSelectionState3();
+    }
+
+    function startEdit3(index) {
+      const item = data3[index];
+      tanggalInput3.value = item.tanggalPrint;
+      pengirimInput3.value = item.pengirim;
+      petugasInput3.value = item.petugas;
+      filmRejectInput3.value = item.filmReject;
+      filmNonRejectInput3.value = item.filmNonReject;
+      editIndex3 = index;
+      cancelBtn3.classList.remove('hidden');
+      saveBtn3.innerHTML = '<i class="fas fa-save"></i><span> Update</span>';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteRow3(index) {
+      if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+        data3.splice(index, 1);
+        saveData3();
+        if (editIndex3 === index) {
+          resetForm3();
+        } else if (editIndex3 > index) {
+          editIndex3--;
+        }
+        renderTable3();
+      }
+    }
+
+    function resetForm3() {
+      form3.reset();
+      editIndex3 = -1;
+      cancelBtn3.classList.add('hidden');
+      saveBtn3.innerHTML = '<i class="fas fa-save"></i><span> Simpan</span>';
+    }
+
+    form3.addEventListener('submit', e => {
+      e.preventDefault();
+      const newItem = {
+        tanggalPrint: tanggalInput3.value,
+        pengirim: pengirimInput3.value.trim(),
+        petugas: petugasInput3.value.trim(),
+        filmReject: Number(filmRejectInput3.value),
+        filmNonReject: Number(filmNonRejectInput3.value)
+      };
+
+      if (editIndex3 === -1) {
+        data3.push(newItem);
+      } else {
+        data3[editIndex3] = newItem;
+      }
+      saveData3();
+      resetForm3();
+      renderTable3();
+    });
+
+    cancelBtn3.addEventListener('click', e => {
+      e.preventDefault();
+      resetForm3();
+    });
+
+    selectAllCheckbox3.addEventListener('change', () => {
+      const checked = selectAllCheckbox3.checked;
+      document.querySelectorAll('.rowCheckbox3').forEach(cb => {
+        cb.checked = checked;
+      });
+      updateSelectionState3();
+    });
+
+    deleteSelectedBtn3.addEventListener('click', () => {
+      const selectedIndexes = getSelectedIndexes3();
+      if (selectedIndexes.length === 0) return;
+      if (confirm(`Apakah Anda yakin ingin menghapus ${selectedIndexes.length} data terpilih?`)) {
+        selectedIndexes.sort((a,b) => b - a);
+        for (const idx of selectedIndexes) {
+          if (editIndex3 === idx) resetForm3();
+          data3.splice(idx, 1);
+          if (editIndex3 > idx) editIndex3--;
+        }
+        saveData3();
+        renderTable3();
+      }
+    });
+
+    cancelSelectionBtn3.addEventListener('click', () => {
+      document.querySelectorAll('.rowCheckbox3').forEach(cb => {
+        cb.checked = false;
+      });
+      selectAllCheckbox3.checked = false;
+      selectAllCheckbox3.indeterminate = false;
+      updateSelectionState3();
+    });
+
+    function getSelectedIndexes3() {
+      const selected = [];
+      document.querySelectorAll('.rowCheckbox3').forEach(cb => {
+        if (cb.checked) selected.push(parseInt(cb.getAttribute('data-index')));
+      });
+      return selected;
+    }
+
+    function updateSelectionState3() {
+      const checkboxes = document.querySelectorAll('.rowCheckbox3');
+      const checkedBoxes = document.querySelectorAll('.rowCheckbox3:checked');
+      if (checkboxes.length === 0) {
+        selectAllCheckbox3.checked = false;
+        selectAllCheckbox3.indeterminate = false;
+        deleteSelectedBtn3.disabled = true;
+        cancelSelectionBtn3.disabled = true;
+        return;
+      }
+      if (checkedBoxes.length === 0) {
+        selectAllCheckbox3.checked = false;
+        selectAllCheckbox3.indeterminate = false;
+        deleteSelectedBtn3.disabled = true;
+        cancelSelectionBtn3.disabled = true;
+      } else if (checkedBoxes.length === checkboxes.length) {
+        selectAllCheckbox3.checked = true;
+        selectAllCheckbox3.indeterminate = false;
+        deleteSelectedBtn3.disabled = false;
+        cancelSelectionBtn3.disabled = false;
+      } else {
+        selectAllCheckbox3.checked = false;
+        selectAllCheckbox3.indeterminate = true;
+        deleteSelectedBtn3.disabled = false;
+        cancelSelectionBtn3.disabled = false;
+      }
+    }
+
+    // Filter data by date range for slide 1
+    function filterDataByDateRange1() {
+      const startDate = new Date(document.getElementById('startDate')?.value || '0000-01-01');
+      const endDate = new Date(document.getElementById('endDate')?.value || '9999-12-31');
+      return data1.filter(item => {
+        const itemDate = new Date(item.tanggal);
+        return itemDate >= startDate && itemDate <= endDate;
+      });
+    }
+
+    // Filter data by date range for slide 2
+    function filterDataByDateRange2() {
+      const startDate = new Date(document.getElementById('startDate')?.value || '0000-01-01');
+      const endDate = new Date(document.getElementById('endDate')?.value || '9999-12-31');
+      return data2.filter(item => {
+        const itemDate = new Date(item.tanggal);
+        return itemDate >= startDate && itemDate <= endDate;
+      });
+    }
+
+    // Filter data by date range for slide 3
+    function filterDataByDateRange3() {
+      const startDate = new Date(document.getElementById('startDate')?.value || '0000-01-01');
+      const endDate = new Date(document.getElementById('endDate')?.value || '9999-12-31');
+      return data3.filter(item => {
+        const itemDate = new Date(item.tanggalPrint);
+        return itemDate >= startDate && itemDate <= endDate;
+      });
+    }
+
+    // Export Slide 1 to Excel
+    exportExcelBtn1.addEventListener('click', () => {
+      const filteredData = filterDataByDateRange1();
+      if (filteredData.length === 0) {
+        alert('Tidak ada data untuk diekspor pada rentang tanggal yang dipilih.');
+        return;
+      }
+      const ws_data = [
+        ['Tanggal Kegiatan', 'Nama Pengirim', 'ID', 'Nama Peserta', 'Jenis Kelamin', 'Catatan']
+      ];
+      filteredData.forEach(item => {
+        ws_data.push([item.tanggal, item.pengirim, item.id, item.peserta, item.jenisKelamin, item.catatan]);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Slide1');
+      XLSX.writeFile(wb, 'data_slide1_filtered.xlsx');
+    });
+
+    // Export Slide 1 to PDF
+    exportPdfBtn1.addEventListener('click', () => {
+      const filteredData = filterDataByDateRange1();
+      if (filteredData.length === 0) {
+        alert('Tidak ada data untuk diekspor pada rentang tanggal yang dipilih.');
+        return;
+      }
+      const doc = new jsPDF();
+      const columns = [
+        { header: 'Tanggal Kegiatan', dataKey: 'tanggal' },
+        { header: 'Nama Pengirim', dataKey: 'pengirim' },
+        { header: 'ID', dataKey: 'id' },
+        { header: 'Nama Peserta', dataKey: 'peserta' },
+        { header: 'Jenis Kelamin', dataKey: 'jenisKelamin' },
+        { header: 'Catatan', dataKey: 'catatan' }
+      ];
+      doc.autoTable({
+        columns,
+        body: filteredData,
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [37, 99, 235] },
+        margin: { top: 20 },
+        didDrawPage: function (data) {
+          doc.setFontSize(14);
+          doc.setTextColor(40);
+          doc.text('Data Slide1', data.settings.margin.left, 15);
+          const startDateVal = document.getElementById('startDate').value;
+          const endDateVal = document.getElementById('endDate').value;
+          if (startDateVal || endDateVal) {
+            let rangeText = 'Rentang Tanggal: ';
+            rangeText += startDateVal || 'Awal';
+            rangeText += ' s/d ';
+            rangeText += endDateVal || 'Akhir';
+            doc.setFontSize(10);
+            doc.text(rangeText, data.settings.margin.left, 22);
+          }
+        }
+      });
+      doc.save('data_slide1_filtered.pdf');
+    });
+
+    // Export Slide 2 to Excel
+    exportExcelBtn2.addEventListener('click', () => {
+      const filteredData = filterDataByDateRange2();
+      if (filteredData.length === 0) {
+        alert('Tidak ada data untuk diekspor pada rentang tanggal yang dipilih.');
+        return;
+      }
+      const ws_data = [
+        ['Tanggal Kegiatan', 'Nama Petugas', 'Jumlah', 'Nama Pengirim']
+      ];
+      filteredData.forEach(item => {
+        ws_data.push([item.tanggal, item.petugas, item.jumlah, item.pengirim]);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Slide2');
+      XLSX.writeFile(wb, 'data_slide2_filtered.xlsx');
+    });
+
+    // Export Slide 2 to PDF
+    exportPdfBtn2.addEventListener('click', () => {
+      const filteredData = filterDataByDateRange2();
+      if (filteredData.length === 0) {
+        alert('Tidak ada data untuk diekspor pada rentang tanggal yang dipilih.');
+        return;
+      }
+      const doc = new jsPDF();
+      const columns = [
+        { header: 'Tanggal Kegiatan', dataKey: 'tanggal' },
+        { header: 'Nama Petugas', dataKey: 'petugas' },
+        { header: 'Jumlah', dataKey: 'jumlah' },
+        { header: 'Nama Pengirim', dataKey: 'pengirim' }
+      ];
+      doc.autoTable({
+        columns,
+        body: filteredData,
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [37, 99, 235] },
+        margin: { top: 20 },
+        didDrawPage: function (data) {
+          doc.setFontSize(14);
+          doc.setTextColor(40);
+          doc.text('Data Slide2', data.settings.margin.left, 15);
+          const startDateVal = document.getElementById('startDate').value;
+          const endDateVal = document.getElementById('endDate').value;
+          if (startDateVal || endDateVal) {
+            let rangeText = 'Rentang Tanggal: ';
+            rangeText += startDateVal || 'Awal';
+            rangeText += ' s/d ';
+            rangeText += endDateVal || 'Akhir';
+            doc.setFontSize(10);
+            doc.text(rangeText, data.settings.margin.left, 22);
+          }
+        }
+      });
+      doc.save('data_slide2_filtered.pdf');
+    });
+
+    // Export Slide 3 to Excel
+    exportExcelBtn3.addEventListener('click', () => {
+      const filteredData = filterDataByDateRange3();
+      if (filteredData.length === 0) {
+        alert('Tidak ada data untuk diekspor pada rentang tanggal yang dipilih.');
+        return;
+      }
+      const ws_data = [
+        ['Tanggal Di Print', 'Nama Pengirim', 'Nama Petugas', 'Film Reject', 'Film Non Reject']
+      ];
+      filteredData.forEach(item => {
+        ws_data.push([item.tanggalPrint, item.pengirim, item.petugas, item.filmReject, item.filmNonReject]);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Slide3');
+      XLSX.writeFile(wb, 'data_slide3_filtered.xlsx');
+    });
+
+    // Export Slide 3 to PDF
+    exportPdfBtn3.addEventListener('click', () => {
+      const filteredData = filterDataByDateRange3();
+      if (filteredData.length === 0) {
+        alert('Tidak ada data untuk diekspor pada rentang tanggal yang dipilih.');
+        return;
+      }
+      const doc = new jsPDF();
+      const columns = [
+        { header: 'Tanggal Di Print', dataKey: 'tanggalPrint' },
+        { header: 'Nama Pengirim', dataKey: 'pengirim' },
+        { header: 'Nama Petugas', dataKey: 'petugas' },
+        { header: 'Film Reject', dataKey: 'filmReject' },
+        { header: 'Film Non Reject', dataKey: 'filmNonReject' }
+      ];
+      doc.autoTable({
+        columns,
+        body: filteredData,
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [37, 99, 235] },
+        margin: { top: 20 },
+        didDrawPage: function (data) {
+          doc.setFontSize(14);
+          doc.setTextColor(40);
+          doc.text('Data Slide3', data.settings.margin.left, 15);
+          const startDateVal = document.getElementById('startDate').value;
+          const endDateVal = document.getElementById('endDate').value;
+          if (startDateVal || endDateVal) {
+            let rangeText = 'Rentang Tanggal: ';
+            rangeText += startDateVal || 'Awal';
+            rangeText += ' s/d ';
+            rangeText += endDateVal || 'Akhir';
+            doc.setFontSize(10);
+            doc.text(rangeText, data.settings.margin.left, 22);
+          }
+        }
+      });
+      doc.save('data_slide3_filtered.pdf');
+    });
+
+    // Initial load and render
+    loadData();
+    renderTable1();
+    renderTable2();
+    renderTable3();
+  </script>
+</body>
+</html>
